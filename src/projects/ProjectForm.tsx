@@ -5,10 +5,11 @@ import { Project } from './Project';
 
 export interface ProjectFormProps {
     project: Project;
+    onCancel: () => void;
 }
 
 
-function ProjectForm(props: ProjectFormProps) {
+function ProjectForm({project, onCancel}: ProjectFormProps) {
     return (
         <form className='input-group vertical'>
             <label htmlFor="name">Project Name</label>
@@ -28,7 +29,11 @@ function ProjectForm(props: ProjectFormProps) {
                     Save
                 </button>
                 <span />
-                <button className='bordered medium' type="button">
+                <button
+                    className='bordered medium'
+                    type="button"
+                    onClick={onCancel}
+                >
                     Cancel
                 </button>
             </div>

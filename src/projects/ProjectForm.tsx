@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 
 import { Project } from './Project';
 
@@ -6,12 +6,19 @@ import { Project } from './Project';
 export interface ProjectFormProps {
     project: Project;
     onCancel: () => void;
+    onSave: (project: Project) => void;
 }
 
 
-function ProjectForm({project, onCancel}: ProjectFormProps) {
+function ProjectForm({project, onCancel, onSave}: ProjectFormProps) {
+
+    const handleSubmit = (event: SyntheticEvent) => {
+        event.preventDefault();
+        onSave(new Project({name: 'Updated Project'}));
+    };
+
     return (
-        <form className='input-group vertical'>
+        <form className='input-group vertical' onSubmit={handleSubmit}>
             <label htmlFor="name">Project Name</label>
             <input type="text" name="name" placeholder='enter name' />
             

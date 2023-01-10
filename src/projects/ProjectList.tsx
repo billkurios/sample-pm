@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Project } from './Project';
 import ProjectCard from './ProjectCard';
+import ProjectForm from './ProjectForm';
 
 
 export interface ProjectListProps {
@@ -10,13 +11,23 @@ export interface ProjectListProps {
 
 
 function ProjectList({ projects }: ProjectListProps) {
+    const handleEdit = (project: Project) => {
+        console.log(project);
+    };
+
+    const items = projects.map((project) => (
+        <div key={project.id} className='cols-sm'>
+            <ProjectCard
+                project={project}
+                onEdit={handleEdit}
+            />
+            <ProjectForm project={project} />
+        </div>
+    ));
+
     return (
         <div className='row'>
-            {projects.map((project) => (
-                <div key={project.id} className='cols-sm'>
-                    <ProjectCard project={project} />
-                </div>
-            ))}
+            {items}
         </div>
     );
 }

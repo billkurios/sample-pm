@@ -9,14 +9,15 @@ function ProjectsPage() {
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState<Boolean>(false);
     const [error, setError] = useState<string | undefined>(undefined);
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     useEffect(() => {
         async function loadProjects() {
             setLoading(true);
             try {
-                const data = await projectAPI.get(1);
+                const data = await projectAPI.get(currentPage);
                 setError('');
-                setProjects(data);
+                setProjects([...projects, ...data]);
             } catch(e) {
                 if(e instanceof Error) {
                     setError(e.message);
@@ -26,7 +27,11 @@ function ProjectsPage() {
             }
         }
         loadProjects();
-    }, []);
+    }, [currentPage]);
+
+    const handleMoreClick = () => {
+        setCurrentPage((currentPage) => currentPage + 1);
+    }
 
     const saveProject = (project: Project) => {
         let updatedProjects = projects.map((p: Project) => {
@@ -38,6 +43,7 @@ function ProjectsPage() {
     return (
         <>
             <h1>Projects</h1>
+
             {error && (
                 <div className='row'>
                     <div className='card large error'>
@@ -50,10 +56,24 @@ function ProjectsPage() {
                     </div>
                 </div>
             )}
+
             <ProjectList
                 onSave={saveProject}
                 projects={projects}
             />
+
+            {!loading && !error && (
+                <div className='row'>
+                    <div className='col-sm-12'>
+                        <div className='button-group fluid'>
+                            <button className='button default' onClick={handleMoreClick}>
+                                More...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {loading && (
                 <div className='center-page'>
                     <span className='spinner primary'></span>

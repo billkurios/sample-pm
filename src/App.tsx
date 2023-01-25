@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import ProjectsPage from './projects/ProjectsPage';
+import ProjectPage from './projects/ProjectPage';
 import HomePage from './home/HomePage';
 
 import './App.css';
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:id" element={<ProjectPage />} />
         </Routes>
       </div>
     </Router>

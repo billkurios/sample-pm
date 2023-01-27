@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "name": "Denesik BBC",
+      "name": "Denesik ABC",
       "description": "Re-contextualized dynamic moratorium. Aut nulla soluta numquam qui dolor architecto et facere dolores.",
       "imageUrl": "/assets/placeimg_500_300_arch12.jpg",
       "contractTypeId": 6,
@@ -59,9 +59,6 @@
       "contractSignedOn": "2016-09-23T21:27:25.035Z",
       "budget": 53407,
       "isActive": false
-    },
-    {
-      "id": 7
     }
   ]
 }

@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": 1,
-      "name": "Johnson - Kutch",
+      "name": "Johnson - Kutchin",
       "description": "Fully-configurable intermediate framework. Ullam occaecati libero laudantium nihil voluptas omnis.",
       "imageUrl": "/assets/placeimg_500_300_arch4.jpg",
       "contractTypeId": 3,
@@ -59,6 +59,9 @@
       "contractSignedOn": "2016-09-23T21:27:25.035Z",
       "budget": 53407,
       "isActive": false
+    },
+    {
+      "id": 7
     }
   ]
 }

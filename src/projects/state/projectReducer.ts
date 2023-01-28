@@ -9,13 +9,17 @@ import {
     SAVE_PROJECT_FAILURE,
     SAVE_PROJECT_REQUEST,
     SAVE_PROJECT_SUCCESS,
-    ProjectState
+    ProjectState,
+    LOAD_PROJECT_REQUEST,
+    LOAD_PROJECT_SUCCESS,
+    LOAD_PROJECT_FAILURE
 } from './projectTypes';
 import { Project } from '../Project';
 
 
 export const initialProjectState: ProjectState = {
     projects: [],
+    currentProject: undefined,
     loading: false,
     error: undefined,
     page: 1
@@ -39,6 +43,29 @@ export function projectReducer(
                 error: ''
             };
         case LOAD_PROJECTS_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload.message
+            };
+        case LOAD_PROJECT_REQUEST:
+            let findSelectedProject = state.projects.filter(
+                (project: Project) => project.id === action.payload.id
+            );
+            return {
+                ...state,
+                currentProject: findSelectedProject.length ? findSelectedProject[0] : undefined,
+                loading: true,
+                error: ''
+            };
+        case LOAD_PROJECT_SUCCESS:
+            return {
+                ...state,
+                loading: false, 
+                currentProject: action.payload.project,
+                error: ''
+            };
+        case LOAD_PROJECT_FAILURE:
             return {
                 ...state,
                 loading: false,

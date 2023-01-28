@@ -9,11 +9,13 @@ import ProjectDetail from './ProjectDetail';
 import { Project } from './Project';
 import { AppState } from '../state';
 import { ProjectState } from './state/projectTypes';
+import { loadProject } from './state/projectActions';
 
 
 function ProjectPage(props: any) {
   const params = useParams();
   const id = Number(params.id);
+
   const loading = useSelector(
     (appState: AppState) => appState.projectState.loading
   );
@@ -21,32 +23,14 @@ function ProjectPage(props: any) {
     (appState: AppState) => appState.projectState.error
   );
   const project = useSelector(
-    (appState: AppState) => {
-      let filteredProjects = appState.projectState.projects.filter(
-        (projectItem) => projectItem.id === id
-      );
-      return filteredProjects.length ? filteredProjects[0] : null;
-    }
+    (appState: AppState) => appState.projectState.currentProject
   );
+
   const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
 
-//   useEffect(() => {
-//     dispatch(loadProjects(1));
-// }, [dispatch]);
-
-//   useEffect(() => {
-//     setLoading(true);
-//     projectAPI
-//       .find(id)
-//       .then((data) => {
-//         setProject(data);
-//         setLoading(false);
-//       })
-//       .catch((e) => {
-//         setError(e);
-//         setLoading(false);
-//       });
-//   }, [id]);
+  useEffect(() => {
+    dispatch(loadProject(id));
+}, [dispatch]);
 
   return (
     <div>

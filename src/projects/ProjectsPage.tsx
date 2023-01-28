@@ -4,8 +4,6 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
 import ProjectList from './ProjectList';
-import { Project } from './Project';
-import { projectAPI } from './projectAPI';
 import { AppState } from '../state';
 import { ProjectState } from './state/projectTypes';
 import { loadProjects } from './state/projectActions';

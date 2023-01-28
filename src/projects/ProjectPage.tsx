@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-import { projectAPI } from './projectAPI';
 import ProjectDetail from './ProjectDetail';
-import { Project } from './Project';
 import { AppState } from '../state';
 import { ProjectState } from './state/projectTypes';
 import { loadProject } from './state/projectActions';
@@ -30,7 +28,7 @@ function ProjectPage(props: any) {
 
   useEffect(() => {
     dispatch(loadProject(id));
-}, [dispatch]);
+}, [dispatch, id]);
 
   return (
     <div>

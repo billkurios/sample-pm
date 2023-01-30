@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-import { saveProject } from './state/projectActions';
+// import { saveProject } from './state/projectActions';
 import { ProjectState } from './state/projectTypes';
 import { Project } from './Project';
+import { useSaveProject } from './projectHooks';
 
 
 export interface ProjectFormProps {
@@ -26,11 +27,13 @@ function ProjectForm({
     });
 
     const dispatch = useDispatch<ThunkDispatch<ProjectState, any, AnyAction>>();
+    const { mutate: saveProject, isLoading } = useSaveProject();
 
     const handleSubmit = (event: SyntheticEvent) => {
         event.preventDefault();
         if (!isValid()) return;
-        dispatch(saveProject(project));
+        // dispatch(saveProject(project));
+        saveProject(project);
     };
 
     const handleChange = (event: BaseSyntheticEvent) => {
@@ -78,6 +81,7 @@ function ProjectForm({
  
     return (
         <form className='input-group vertical' onSubmit={handleSubmit}>
+            {isLoading && <span className="toast">Saving...</span>}
             <label htmlFor="name">Project Name</label>
             <input
                 type="text"

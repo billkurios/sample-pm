@@ -63,7 +63,7 @@ function ProjectsPage() {
                 </>
             ) : isLoading ? (
                 <div className='center-page'>
-                    <span className='spinner priimary' />
+                    <span className='spinner primary' />
                     <p>Loading ...</p>
                 </div>
             ) : isError && error instanceof Error ? (

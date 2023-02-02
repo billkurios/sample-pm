@@ -1,7 +1,7 @@
 import { Project } from './Project';
 
 const baseUrl = 'http://localhost:4000';
-const url = `${baseUrl}/projects`;
+export const url = `${baseUrl}/projects`;
 
 
 const translateStatusToErrorMessage = (status: number) => {
@@ -16,16 +16,17 @@ const translateStatusToErrorMessage = (status: number) => {
 };
 
 const checkStatus = (response: any) => {
-    if (response.ok) {
+    let responseStatus = response.status;
+    if (responseStatus >= 200 && responseStatus <= 226) {
         return response;
     }
 
     const httpErrorInfo = {
-        status: response.status,
+        status: responseStatus,
         statusText: response.statusText,
         url: response.url,
     };
-    console.log(`log server http error: ${JSON.stringify(httpErrorInfo)}`);
+    console.error(`log server http error: ${JSON.stringify(httpErrorInfo)}`);
 
     let errorMessage = translateStatusToErrorMessage(httpErrorInfo.status);
     throw new Error(errorMessage);
@@ -54,12 +55,11 @@ const convertToProjectModel = (item: any): Project => {
 const projectAPI = {
     get(page = 1, limit = 20) {
         return fetch(`${url}?_page=${page}&_limit=${limit}&_sort=name`)
-            .then(delay(5000))
+            // .then(delay(5000))
             .then(checkStatus)
             .then(parseJSON)
             .then(convertToProjectModels)
             .catch((error: TypeError) => {
-                console.log(`log client error ${error}`);
                 throw new Error('There was an error retrieving the projects. Please try again.');
             });
     },

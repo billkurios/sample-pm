@@ -89,6 +89,8 @@ function ProjectForm({
             {isLoading && <span className="toast">Saving...</span>}
             <label htmlFor="name">Project Name</label>
             <input
+                id="name"
+                aria-label="project name"
                 type="text"
                 name="name"
                 placeholder='enter name'
@@ -96,26 +98,35 @@ function ProjectForm({
                 onChange={handleChange}
             />
             { (errors.name.length > 0) && (
-                <div className='card error'>
+                <div
+                    role="alert"
+                    className='card error'
+                >
                     <p>{errors.name}</p>
                 </div>
             )}
             
             <label htmlFor="description">Project description</label>
             <textarea
+                id="description"
+                aria-label="project description"
                 name="description"
                 placeholder='enter description'
                 value={project.description}
                 onChange={handleChange}
             />
             { (errors.description.length > 0) && (
-                <div className='card error'>
+                <div
+                    role="alert"
+                    className='card error'
+                >
                     <p>{errors.description}</p>
                 </div>
             )}
 
             <label htmlFor="budget">Project Budget</label>
             <input
+                id="budget"
                 name="budget"
                 type="number"
                 placeholder='enter budget'
@@ -123,13 +134,17 @@ function ProjectForm({
                 onChange={handleChange}
             />
             { (errors.budget.length > 0) && (
-                <div className='card error'>
+                <div
+                    role="alert"
+                    className='card error'
+                >
                     <p>{errors.budget}</p>
                 </div>
             )}
 
             <label htmlFor="isActive">Active?</label>
             <input
+                id="isActive"
                 type="checkbox"
                 name="isActive"
                 checked={project.isActive}
